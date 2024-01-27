@@ -26,7 +26,20 @@
         <div
           class="row flex-column mt-5 justify-content-center align-items-center"
         >
+          <label for="inputLink" class="form-label text-center text-white col"
+            >Inserisci un Url e genera il tuo qr code da scaricare</label
+          >
+          <input
+            required
+            type="url"
+            placeholder="Incolla qui un URL.."
+            id="inputLink"
+            class="form-control col"
+            aria-describedby="passwordHelpBlock"
+          />
+
           <button
+            id="generate"
             type="button"
             onclick="generateQRCode()"
             class="mt-3 col-2 btn btn-primary border-white rounded-4"
@@ -40,13 +53,15 @@
             Download
           </button>
           <button
-            type="button"
+            id="reset"
             onclick="resetForm()"
             class="mt-3 col-2 btn btn-danger border-white rounded-4"
           >
             Reset and get new
           </button>
-          <h4 id="resetMess" class="mt-3 col-8 text-center text-white"></h4>
+          <h4 id="resetMess" class="mt-3 col-8 text-center text-white">
+            Refresh the page to get back resetted qr code
+          </h4>
           <div class="col-2">
             <div class="row w-51 mt-4" id="qrcode"></div>
           </div>

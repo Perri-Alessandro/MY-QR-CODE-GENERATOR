@@ -1,19 +1,42 @@
+const downloadButton = document.getElementById("downloadButton");
+const reset = document.getElementById("reset");
+const message = document.getElementById("resetMess");
+
+downloadButton.classList.add("d-none");
+reset.classList.add("d-none");
+message.classList.add("d-none");
+
+let isQRCodeGenerated = false;
+
 const generateQRCode = function () {
-  var textToEncode = "https://perri-alessandro.github.io/QR-CODE-PAGE-ZIO/";
+  const inputLink = document.getElementById("inputLink");
+  const url = inputLink.value;
 
-  // Configurazioni opzionali
-  var options = {
-    width: 128,
-    height: 128,
-    colorDark: "#000BFF",
-    colorLight: "#ffffff",
-    correctLevel: QRCode.CorrectLevel.H,
-  };
+  if (url && !isQRCodeGenerated) {
+    // Configurazioni opzionaliurl
+    var options = {
+      width: 128,
+      height: 128,
+      colorDark: "#000BFF",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H,
+    };
 
-  // Creazione del QR code
-  var qrcode = new QRCode(document.getElementById("qrcode"), options);
-  qrcode.makeCode(textToEncode);
-  console.log("OGGETTO QR CODE GENERATO", qrcode);
+    // Creazione del QR code
+    var qrcode = new QRCode(document.getElementById("qrcode"), options);
+    qrcode.makeCode(url);
+    console.log("OGGETTO QR CODE GENERATO", qrcode);
+
+    downloadButton.classList.remove("d-none");
+    reset.classList.remove("d-none");
+
+    isQRCodeGenerated = true;
+    lastGeneratedURL = url;
+  } else {
+    alert(
+      "QR Code già generato, resetta il forma prima di generare un nuovo Qr"
+    );
+  }
 };
 
 const downloadQRCode = function () {
@@ -52,7 +75,16 @@ document
 
 const resetForm = function () {
   document.querySelector("form").reset(); // Resetta il form
-  document.getElementById("qrcode").innerHTML = ""; // Rimuove il QR Code
-  const message = document.getElementById("resetMess");
-  message.innerText = "Refresh the page to get back resetted qr code";
+
+  const downloadButton = document.getElementById("downloadButton");
+  console.log(downloadButton);
+  const reset = document.getElementById("reset");
+
+  downloadButton.classList.add("d-none");
+  reset.classList.add("d-none");
+
+  isQRCodeGenerated = false;
+
+  //   message.classList.remove("d-none");
+  //   message.classList.add("d-flex");
 };
