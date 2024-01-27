@@ -8,11 +8,14 @@ message.classList.add("d-none");
 
 let isQRCodeGenerated = false;
 
+// Espressione regolare per verificare se la stringa è un URL valido
+const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+
 const generateQRCode = function () {
   const inputLink = document.getElementById("inputLink");
   const url = inputLink.value;
 
-  if (url && !isQRCodeGenerated) {
+  if (url && urlRegex.test(url) && !isQRCodeGenerated) {
     // Configurazioni opzionaliurl
     var options = {
       width: 128,
@@ -32,10 +35,12 @@ const generateQRCode = function () {
 
     isQRCodeGenerated = true;
     lastGeneratedURL = url;
-  } else {
+  } else if (isQRCodeGenerated) {
     alert(
       "QR Code già generato, resetta il forma prima di generare un nuovo Qr"
     );
+  } else if (!isQRCodeGenerated) {
+    alert("INSERIRE UN URL !!");
   }
 };
 
@@ -88,3 +93,14 @@ const resetForm = function () {
   //   message.classList.remove("d-none");
   //   message.classList.add("d-flex");
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+  const inputLink = document.getElementById("inputLink");
+  inputLink.focus();
+});
+
+let annoCorrente = new Date().getFullYear();
+let eccolo = (document.getElementById("anno").innerHTML =
+  "&copy;" +
+  annoCorrente +
+  ", QR Code Generator. All rights reserved. Created by Perri Alessandro");
