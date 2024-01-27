@@ -103,4 +103,4 @@ let annoCorrente = new Date().getFullYear();
 let eccolo = (document.getElementById("anno").innerHTML =
   "&copy;" +
   annoCorrente +
-  ", QR Code Generator. All rights reserved. Created by Perri Alessandro");
+  " QR Code Generator. All rights reserved. Created by Perri Alessandro");
