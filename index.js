@@ -1,0 +1,58 @@
+const generateQRCode = function () {
+  var textToEncode = "https://perri-alessandro.github.io/QR-CODE-PAGE-ZIO/";
+
+  // Configurazioni opzionali
+  var options = {
+    width: 128,
+    height: 128,
+    colorDark: "#000BFF",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H,
+  };
+
+  // Creazione del QR code
+  var qrcode = new QRCode(document.getElementById("qrcode"), options);
+  qrcode.makeCode(textToEncode);
+  console.log("OGGETTO QR CODE GENERATO", qrcode);
+};
+
+const downloadQRCode = function () {
+  var canvas = document
+    .getElementById("qrcode")
+    .getElementsByTagName("canvas")[0];
+
+  var borderedCanvas = document.createElement("canvas");
+  var ctx = borderedCanvas.getContext("2d");
+  var borderSizeX = 8; // pixel
+  var borderSizeY = 8;
+
+  borderedCanvas.width = canvas.width + 2 * borderSizeX;
+  borderedCanvas.height = canvas.height + 2 * borderSizeY;
+
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, borderedCanvas.width, borderedCanvas.height);
+
+  // Disegnare il QR code centrato sia orizzontalmente che verticalmente nel nuovo canvas
+  ctx.drawImage(canvas, borderSizeX, borderSizeY);
+
+  // Creare un link di download
+  var downloadLink = document.createElement("a");
+  downloadLink.href = borderedCanvas.toDataURL("image/png");
+  downloadLink.download = "brano_qr_code.png";
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+  console.log("QR CODE SCARICATO", downloadLink);
+};
+
+document
+  .getElementById("downloadButton")
+  .addEventListener("click", downloadQRCode);
+
+const resetForm = function () {
+  document.querySelector("form").reset(); // Resetta il form
+  document.getElementById("qrcode").innerHTML = ""; // Rimuove il QR Code
+  const message = document.getElementById("resetMess");
+  message.innerText = "Refresh the page to get back resetted qr code";
+};
