@@ -37,7 +37,7 @@ const generateQRCode = function () {
     lastGeneratedURL = url;
   } else if (isQRCodeGenerated) {
     alert(
-      "QR Code già generato, resetta il forma prima di generare un nuovo Qr"
+      "QR Code già generato, resetta il form prima di generare un nuovo Qr"
     );
   } else if (!isQRCodeGenerated) {
     alert("INSERIRE UN URL !!");
@@ -72,6 +72,8 @@ const downloadQRCode = function () {
   downloadLink.click();
   document.body.removeChild(downloadLink);
   console.log("QR CODE SCARICATO", downloadLink);
+
+  alert("QR CODE SCARICATO");
 };
 
 document
@@ -94,6 +96,7 @@ const resetForm = function () {
   //   message.classList.add("d-flex");
 };
 
+/// FOCUS IN INPUT FORM AL CARICAMENTO DELLA PAGINA ///
 document.addEventListener("DOMContentLoaded", function () {
   const inputLink = document.getElementById("inputLink");
   inputLink.focus();
