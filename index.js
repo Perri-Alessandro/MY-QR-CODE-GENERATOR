@@ -44,6 +44,8 @@ const generateQRCode = function () {
   }
 };
 
+let scaricato = false;
+
 const downloadQRCode = function () {
   var canvas = document
     .getElementById("qrcode")
@@ -66,14 +68,17 @@ const downloadQRCode = function () {
   // Creare un link di download
   var downloadLink = document.createElement("a");
   downloadLink.href = borderedCanvas.toDataURL("image/png");
-  downloadLink.download = "brano_qr_code.png";
+  downloadLink.download = "Qr_Code.png";
 
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);
   console.log("QR CODE SCARICATO", downloadLink);
 
-  alert("QR CODE SCARICATO");
+  scaricato = true;
+  if (scaricato) {
+    alert("QR CODE SCARICATO");
+  }
 };
 
 document
