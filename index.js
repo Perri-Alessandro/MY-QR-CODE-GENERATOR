@@ -44,8 +44,6 @@ const generateQRCode = function () {
   }
 };
 
-let scaricato = false;
-
 const downloadQRCode = function () {
   var canvas = document
     .getElementById("qrcode")
@@ -75,10 +73,7 @@ const downloadQRCode = function () {
   document.body.removeChild(downloadLink);
   console.log("QR CODE SCARICATO", downloadLink);
 
-  scaricato = true;
-  if (scaricato) {
-    alert("QR CODE SCARICATO");
-  }
+  alert("DOWNLOAD IN CORSO, IL FORM VERRà RESETTATO AL TERMINE");
 };
 
 document
