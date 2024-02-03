@@ -1,13 +1,16 @@
 #anno {
   font-size: 1.1em;
   @media screen and (max-width: 767px) {
-    font-size: 1em;
+    font-size: 0.9em;
   }
   @media screen and (max-width: 575px) {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
   @media screen and (max-width: 413px) {
-    font-size: 0.6rem;
+    font-size: 0.534rem;
+  }
+  @media screen and (max-width: 320px) {
+    font-size: 0.48rem;
   }
 }
 
